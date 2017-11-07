@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
-    marginBottom: 30
+    marginBottom: 10
   }
 })
 

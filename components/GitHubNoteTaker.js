@@ -5,11 +5,17 @@ import Header from './Header'
 import Detail from './Detail'
 
 class GitHubNoteTaker extends Component {
+  
+  onSearchClick = () => {
+    console.log('search clicked')
+  }
+
   render() {
     return(
       <View style={styles.container}>
         <Header title='GitHub Note Taker' />
-        <Detail />
+        <Detail 
+          onSearchClick={this.onSearchClick} />
       </View>
     )
   }
