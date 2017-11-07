@@ -2,16 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 import Header from './Header'
-
-const Detail = () => {
-  return(
-    <View style={styles.detailContainer}>
-      <Text>
-        Detail
-      </Text>
-    </View>
-  )
-}
+import Detail from './Detail'
 
 class GitHubNoteTaker extends Component {
   render() {
@@ -27,12 +18,6 @@ class GitHubNoteTaker extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  detailContainer: {
-    flex: 8.5,
-    backgroundColor: '#a593e0',
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 })
 
