@@ -1,16 +1,63 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 
 class UserDetail extends Component {
   render() {
+    const { name, company, avatar_url } = this.props.navigation.state.params
     return(
-      <View>
-        <Text>
-          User details
-        </Text>
+      <View style={{flex: 1}}>
+        <View style={styles.picContainer}>
+          <Image 
+            style={styles.pic}          
+            source={{uri: avatar_url}} />
+          <Text style={{fontSize: 20, marginTop: 20}}>{name}</Text>
+          <Text style={{fontSize: 20, marginTop: 10}}>{company}</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <View style={[styles.info, styles.profile]}>
+            <Text style={styles.text}>View Profile</Text>
+          </View>
+          <View style={[styles.info, styles.repo]}>
+            <Text style={styles.text}>View Repo</Text>
+          </View>
+          <View style={[styles.info, styles.note]}>
+            <Text style={styles.text}>Take Note</Text>
+          </View>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  picContainer: {
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#5cab7d'
+  },
+  pic: {
+    width: 200,
+    height: 200,
+    borderRadius: 100
+  },
+  info: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  profile: {
+    backgroundColor: '#fc913a'
+  },
+  repo: {
+    backgroundColor: '#fcbe32'
+  },
+  note: {
+    backgroundColor: '#eb9f9f'
+  },
+  text: {
+    fontSize: 25
+  }
+})
 
 export default UserDetail
