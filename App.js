@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import GitHubNoteTaker from './components/GitHubNoteTaker'
 import { MainStack } from './components/Navigator'
 
 export default class App extends React.Component {

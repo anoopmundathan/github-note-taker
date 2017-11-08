@@ -1,4 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
 
-const UserDetail = () => <View><Text>UserDetail</Text></View>
+class UserDetail extends Component {
+  render() {
+    return(
+      <View>
+        <Text>
+          User details
+        </Text>
+      </View>
+    )
+  }
+}
+
 export default UserDetail

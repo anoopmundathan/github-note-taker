@@ -10,8 +10,7 @@ import {
 
 class Main extends Component {
   state = {
-    user: '',
-    info: {}
+    user: ''
   }
 
   onSearchChange = (text) => {
@@ -22,9 +21,7 @@ class Main extends Component {
     const { user } = this.state
     fetchUser(user)
       .then(data => {
-        this.setState({
-          info: data
-        })
+        this.props.navigation.navigate('UserDetail', data)
       })
   }
 
