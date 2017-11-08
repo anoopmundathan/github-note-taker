@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { fetchUser } from '../utils/api'
+
 import { 
   View, 
   Text, 
@@ -6,30 +8,50 @@ import {
   TextInput, 
   TouchableOpacity } from 'react-native'
 
-const Detail = (props) => {
-  return(
-    <View style={styles.container}>
-      <Text style={styles.text}>Search GitHub User</Text>
-      <TextInput 
-        style={styles.input}
-        value='hello' />
-      <TouchableOpacity 
-        onPress={props.onSearchClick}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Search</Text>
-      </TouchableOpacity>
-    </View>
-  )
+class Detail extends Component {
+  state = {
+    user: '',
+    info: {}
+  }
+
+  onSearchChange = (text) => {
+    this.setState({ user: text })
+  }
+
+  onSearchPress = () => {
+    const { user } = this.state
+    fetchUser(user)
+      .then(data => {
+        this.setState({
+          info: data
+        })
+      })
+  
+  }
+
+  render() {
+    const { user } = this.state
+    return(
+      <View style={styles.container}>
+        <TextInput
+          placeholder='Search Github User'
+          onChangeText={this.onSearchChange}
+          value={user}
+          style={styles.input} />
+        <TouchableOpacity 
+          onPress={this.onSearchPress}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Search</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 8.5,
     alignItems: 'center'
-  },
-  text: {
-    marginTop: 150,
-    fontSize: 25
   },
   input: {
     width: 300,
@@ -38,6 +60,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#757575',
     margin: 20,
+    marginTop: 150,
     fontSize: 20
   },
   button: {
