@@ -8,7 +8,7 @@ import {
   TextInput, 
   TouchableOpacity } from 'react-native'
 
-class Detail extends Component {
+class Main extends Component {
   state = {
     user: '',
     info: {}
@@ -26,7 +26,6 @@ class Detail extends Component {
           info: data
         })
       })
-  
   }
 
   render() {
@@ -50,8 +49,9 @@ class Detail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 8.5,
-    alignItems: 'center'
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   input: {
     width: 300,
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#757575',
     margin: 20,
-    marginTop: 150,
     fontSize: 20
   },
   button: {
@@ -78,4 +77,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Detail
+export default Main

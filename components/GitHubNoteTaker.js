@@ -1,25 +1,16 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import PropTypes from 'prop-types'
-import Header from './Header'
-import Detail from './Detail'
+import Main from './Main'
 
 class GitHubNoteTaker extends Component {
   render() {
     return(
-      <View style={styles.container}>
-        <Header title='GitHub Note Taker' />
-        <Detail />
+      <View style={{flex: 1}}>
+        <Main />
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-})
 
 export default GitHubNoteTaker
 
