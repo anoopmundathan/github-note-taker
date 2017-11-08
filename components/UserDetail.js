@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image,
+  TouchableOpacity
+ } from 'react-native'
 
 class UserDetail extends Component {
+  onProfilePress = () => {
+    this.props.navigation.navigate('Profile', this.props.navigation.state.params)
+  }
+
   render() {
     const { name, company, avatar_url } = this.props.navigation.state.params
     return(
@@ -15,7 +25,10 @@ class UserDetail extends Component {
         </View>
         <View style={{flex: 1}}>
           <View style={[styles.info, styles.profile]}>
-            <Text style={styles.text}>View Profile</Text>
+            <TouchableOpacity
+              onPress={this.onProfilePress}>
+              <Text style={styles.text}>View Profile</Text>
+            </TouchableOpacity>
           </View>
           <View style={[styles.info, styles.repo]}>
             <Text style={styles.text}>View Repo</Text>
@@ -56,7 +69,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#eb9f9f'
   },
   text: {
-    fontSize: 25
+    fontSize: 25,
+    color: 'white'
   }
 })
 

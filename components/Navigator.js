@@ -2,6 +2,7 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import Main from './Main'
 import UserDetail from './UserDetail'
+import Profile from './Profile'
 
 export const MainStack = StackNavigator({
   Main: {
@@ -12,5 +13,11 @@ export const MainStack = StackNavigator({
   },
   UserDetail: {
     screen: UserDetail
+  },
+  Profile: {
+    screen: Profile, 
+    navigationOptions: {
+      title: 'Profile'
+    }
   }
 })
