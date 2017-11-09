@@ -8,8 +8,14 @@ import {
  } from 'react-native'
 
 class UserDetail extends Component {
+  
   onProfilePress = () => {
     this.props.navigation.navigate('Profile', this.props.navigation.state.params)
+  }
+
+  onRepoPress = () => {
+    const { login } = this.props.navigation.state.params
+    this.props.navigation.navigate('Repo', {user: login})
   }
 
   render() {
@@ -20,8 +26,6 @@ class UserDetail extends Component {
           <Image 
             style={styles.pic}          
             source={{uri: avatar_url}} />
-          <Text style={{fontSize: 20, marginTop: 20}}>{name}</Text>
-          <Text style={{fontSize: 20, marginTop: 10}}>{company}</Text>
         </View>
         <View style={{flex: 1}}>
           <View style={[styles.info, styles.profile]}>
@@ -31,7 +35,10 @@ class UserDetail extends Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.info, styles.repo]}>
-            <Text style={styles.text}>View Repo</Text>
+          <TouchableOpacity
+            onPress={this.onRepoPress}>
+              <Text style={styles.text}>View Repo</Text>
+          </TouchableOpacity>
           </View>
           <View style={[styles.info, styles.note]}>
             <Text style={styles.text}>Take Note</Text>
