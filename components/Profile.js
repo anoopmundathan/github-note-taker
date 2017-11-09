@@ -19,13 +19,25 @@ class Profile extends Component {
             style={styles.pic}
             source={{uri: avatar_url}} />
         </View>
-        <View style={{flex: 1}}>
-          <Text>{company}</Text>
-          <Text>{location}</Text>
-          <Text>{followers}</Text>
-          <Text>{following}</Text>
-          <Text>{email}</Text>
-          <Text>{public_repos}</Text>
+        <View style={styles.infoContainer}>
+          <View style={styles.info}>
+            <Text>{company}</Text>
+          </View>
+          <View style={styles.info}>
+            <Text>{location}</Text>
+          </View>
+          <View style={styles.info}>
+            <Text>{followers}</Text>
+          </View>
+          <View style={styles.info}>
+            <Text>{following}</Text>
+          </View>
+          <View style={styles.info}>
+            <Text>{email}</Text>
+          </View>
+          <View style={styles.info}>
+            <Text>{public_repos}</Text>
+          </View>
         </View>
       </View>
     )
@@ -43,6 +55,15 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100
+  },
+  infoContainer: {
+    flex: 1
+  },
+  info: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
   }
 })
 
