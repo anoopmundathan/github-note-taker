@@ -14,8 +14,8 @@ class UserDetail extends Component {
   }
 
   onRepoPress = () => {
-    const { login } = this.props.navigation.state.params
-    this.props.navigation.navigate('Repo', {user: login})
+    const { login, avatar_url } = this.props.navigation.state.params
+    this.props.navigation.navigate('Repo', {user: login, avatar: avatar_url})
   }
 
   onNotePress = () => {
