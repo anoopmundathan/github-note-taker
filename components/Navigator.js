@@ -4,6 +4,7 @@ import Main from './Main'
 import UserDetail from './UserDetail'
 import Profile from './Profile'
 import Repo from './Repo'
+import Note from './Note'
 
 export const MainStack = StackNavigator({
   Main: {
@@ -25,6 +26,12 @@ export const MainStack = StackNavigator({
     screen: Repo, 
     navigationOptions: {
       title: 'Repo'
+    }
+  },
+  Note: {
+    screen: Note, 
+    navigationOptions: {
+      title: 'Note'
     }
   }
 })

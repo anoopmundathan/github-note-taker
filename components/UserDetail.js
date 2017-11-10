@@ -18,6 +18,10 @@ class UserDetail extends Component {
     this.props.navigation.navigate('Repo', {user: login})
   }
 
+  onNotePress = () => {
+    this.props.navigation.navigate('Note')
+  }
+
   render() {
     const { name, company, avatar_url } = this.props.navigation.state.params
     return(
@@ -41,7 +45,10 @@ class UserDetail extends Component {
           </TouchableOpacity>
           </View>
           <View style={[styles.info, styles.note]}>
-            <Text style={styles.text}>Take Note</Text>
+            <TouchableOpacity
+              onPress={this.onNotePress}>
+                <Text style={styles.text}>Take Note</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
