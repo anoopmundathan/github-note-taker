@@ -7,6 +7,7 @@ class Repo extends Component {
   state = {
     repos: ''
   }
+
   componentDidMount() {
     const { user } = this.props.navigation.state.params
     fetchRepo(user)
@@ -17,6 +18,10 @@ class Repo extends Component {
       })
   }
 
+  onRepoPress = (url) => {
+    this.props.navigation.navigate('Web', {url})
+  }
+
   render() {
     const { repos } = this.state
     const { avatar } = this.props.navigation.state.params
@@ -24,15 +29,19 @@ class Repo extends Component {
       return(
         <ScrollView style={{flex: 1}}>
           <Picture avatar={avatar}/>
-          {repos.map(repo => (
-            <View 
-              key={repo.name}
-              style={styles.container}>
-              <TouchableOpacity>
-                <Text style={styles.text}>{repo.name}</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
+          {repos.map(repo => {
+            const { html_url, name } = repo
+            return(
+              <View 
+                key={name}
+                style={styles.container}>
+                <TouchableOpacity
+                  onPress={() => this.onRepoPress(html_url)}>
+                  <Text style={styles.text}>{name}</Text>
+                </TouchableOpacity>
+              </View>
+            )
+          })}
         </ScrollView>
       )
     } else {
