@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 
 const Picture = (props) => {
   return(
@@ -24,5 +25,9 @@ const styles = StyleSheet.create({
     borderRadius: 100
   }
 })
+
+Picture.PropTypes = {
+  avatar: PropTypes.string.isRequired
+}
 
 export default Picture
