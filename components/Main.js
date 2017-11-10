@@ -19,10 +19,13 @@ class Main extends Component {
 
   onSearchPress = () => {
     const { user } = this.state
-    fetchUser(user)
-      .then(data => {
-        this.props.navigation.navigate('UserDetail', data)
-      })
+    
+    if(user) {
+      fetchUser(user)
+        .then(data => {
+          this.props.navigation.navigate('UserDetail', data)
+        })
+    }
   }
 
   render() {
