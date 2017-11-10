@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { fetchRepo } from '../utils/api'
+import Picture from './Picture'
 
 class Repo extends Component {
   state = {
@@ -18,24 +19,44 @@ class Repo extends Component {
 
   render() {
     const { repos } = this.state
+    const { avatar } = this.props.navigation.state.params
     if(repos.length > 0) {
       return(
         <ScrollView style={{flex: 1}}>
+          <Picture avatar={avatar}/>
           {repos.map(repo => (
-            <Text 
-              style={{flex: 1}}
-              key={repo.name}>{repo.name}</Text>
+            <View 
+              key={repo.name}
+              style={styles.container}>
+              <TouchableOpacity>
+                <Text style={styles.text}>{repo.name}</Text>
+              </TouchableOpacity>
+            </View>
           ))}
         </ScrollView>
       )
     } else {
       return(
-        <View>
-          <Text>No repos</Text>
+        <View style={styles.container}>
+          <Text style={styles.text}>No repos</Text>
         </View>
       )
     }
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#dddfe6'
+  },
+  text: {
+    fontSize: 20,
+    padding: 10
+  }
+})
 
 export default Repo
