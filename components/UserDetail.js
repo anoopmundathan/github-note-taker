@@ -19,7 +19,8 @@ class UserDetail extends Component {
   }
 
   onNotePress = () => {
-    this.props.navigation.navigate('Note')
+    const { login, avatar_url } = this.props.navigation.state.params
+    this.props.navigation.navigate('Note', {user: login, avatar: avatar_url})
   }
 
   render() {
