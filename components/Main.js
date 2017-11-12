@@ -1,5 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TextInput, 
+  TouchableHighlight,
+  ActivityIndicatorIOS
+ } from 'react-native'
+import api from '../utils/api'
+
+const Dashboard = () => <View><Text>Dashboard</Text></View>
 
 class Main extends Component {
   state = {
@@ -9,31 +19,53 @@ class Main extends Component {
   }
 
   onChange = (evt) => {
-    this.setState({
-      userName: evt.nativeEvent.value
-    })
+    this.setState({ userName: evt.nativeEvent.text })
   }
 
   onSearch = () => {
-    this.setState({
-      isLoading: true
-    })
+    this.setState({ isLoading: true })
+    api.getBio(this.state.userName)
+      .then(res => {
+        if(res.message === "Not Found") {
+          this.setState({ 
+            error: 'User not Found',
+            isLoading: false
+          })
+        } else {
+          this.props.navigator.push({
+            component: Dashboard,
+            title: res.name || 'Select an Option',
+            passProps: { userInfo: res }
+          })
+          this.setState({
+            error: false,
+            isLoading: false, 
+            userName: ''
+          })
+        }
+      })
   }
 
   render() {
+  const showError = (
+    this.state.error ?
+      <Text style={styles.errorText}>{this.state.error}</Text>: 
+      <View></View>
+  )
     return(
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Search for a Github User</Text>
         <TextInput 
-          value={this.state.userName}
           style={styles.searchInput}
+          value={this.state.userName}
           onChange={this.onChange.bind(this)} />
         <TouchableHighlight
           style={styles.button}
           underlayColor="white"
-          onPress={this.onSearch}>
+          onPress={this.onSearch.bind(this)}>
           <Text style={styles.buttonText}>Search</Text>
         </TouchableHighlight>
+        {showError}
       </View>
     )
   }
@@ -56,7 +88,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     height: 50,
-    padding: 4,
+    padding: 10,
     marginRight: 5,
     fontSize: 23,
     borderWidth: 1,
@@ -77,9 +109,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 22,
     color: '#111',
     alignSelf: 'center'
+  },
+  errorText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'red'
   }
 })
 
