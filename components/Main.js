@@ -5,7 +5,7 @@ import {
   StyleSheet, 
   TextInput, 
   TouchableHighlight,
-  ActivityIndicatorIOS
+  ActivityIndicator,
  } from 'react-native'
 import api from '../utils/api'
 
@@ -65,6 +65,10 @@ class Main extends Component {
           onPress={this.onSearch.bind(this)}>
           <Text style={styles.buttonText}>Search</Text>
         </TouchableHighlight>
+        <ActivityIndicator
+          animating={this.state.isLoading}
+          color='#111'
+          size='large' />
         {showError}
       </View>
     )
