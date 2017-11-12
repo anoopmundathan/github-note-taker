@@ -8,8 +8,7 @@ import {
   ActivityIndicator,
  } from 'react-native'
 import api from '../utils/api'
-
-const Dashboard = () => <View><Text>Dashboard</Text></View>
+import Dashboard from './DashBoard'
 
 class Main extends Component {
   state = {
