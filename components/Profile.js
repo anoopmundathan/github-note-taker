@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import Badge from './Badge'
+import Seperator from './Helpers/Seperator'
 
 class Profile extends Component {
   getTitle(item) {
@@ -21,6 +22,7 @@ class Profile extends Component {
               <Text style={styles.rowTitle}>{this.getTitle(item)}</Text>
               <Text style={styles.rowContent}>{userInfo[item]}</Text>
             </View>
+            <Seperator />
           </View>
         )
       }
