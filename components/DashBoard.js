@@ -7,6 +7,8 @@ import {
   TouchableHighlight
  } from 'react-native'
 
+ import Profile from './Profile'
+
 class DashBoard extends Component {
   makeBackground(btn) {
     var obj = {
@@ -27,7 +29,11 @@ class DashBoard extends Component {
   }
 
   goToProfile() {
-    console.log('Go to profile');
+    this.props.navigator.push({
+      title: 'Profile Page',
+      component: Profile,
+      passProps: { userInfo: this.props.userInfo }
+    });
   }
   goToRepos() {
     console.log('Go to repos');

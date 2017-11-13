@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 
 class Badge extends Component {
   render() {
     return(
-      <View>
+      <View style={styles.container}>
         <Image
           style={styles.image}
           source={{uri: this.props.userInfo.avatar_url}} />
@@ -40,7 +40,7 @@ var styles = StyleSheet.create({
       marginTop: 10,
       alignSelf: 'center'
   }
-});
+})
 
 Badge.propTypes = {
   userInfo: PropTypes.object.isRequired
