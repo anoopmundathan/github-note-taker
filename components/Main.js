@@ -1,80 +1,126 @@
 import React, { Component } from 'react'
-import { fetchUser } from '../utils/api'
-
 import { 
   View, 
   Text, 
   StyleSheet, 
   TextInput, 
-  TouchableOpacity } from 'react-native'
+  TouchableHighlight,
+  ActivityIndicator,
+ } from 'react-native'
+import api from '../utils/api'
+import Dashboard from './DashBoard'
 
 class Main extends Component {
   state = {
-    user: ''
+    userName: '',
+    isLoading: false,
+    error: false
   }
 
-  onSearchChange = (text) => {
-    this.setState({ user: text })
+  onChange = (evt) => {
+    this.setState({ userName: evt.nativeEvent.text })
   }
 
-  onSearchPress = () => {
-    const { user } = this.state
-    
-    if(user) {
-      fetchUser(user)
-        .then(data => {
-          this.props.navigation.navigate('UserDetail', data)
-        })
-    }
+  onSearch = () => {
+    this.setState({ isLoading: true })
+    api.getBio(this.state.userName)
+      .then(res => {
+        if(res.message === "Not Found") {
+          this.setState({ 
+            error: 'User not Found',
+            isLoading: false
+          })
+        } else {
+          this.props.navigator.push({
+            component: Dashboard,
+            title: res.name || 'Select an Option',
+            passProps: { userInfo: res }
+          })
+          this.setState({
+            error: false,
+            isLoading: false, 
+            userName: ''
+          })
+        }
+      })
   }
 
   render() {
-    const { user } = this.state
+  const showError = (
+    this.state.error ?
+      <Text style={styles.errorText}>{this.state.error}</Text>: 
+      <View></View>
+  )
     return(
-      <View style={styles.container}>
-        <TextInput
-          placeholder='Search Github User'
-          onChangeText={this.onSearchChange}
-          value={user}
-          style={styles.input} />
-        <TouchableOpacity 
-          onPress={this.onSearchPress}
-          style={styles.button}>
+      <View style={styles.mainContainer}>
+        <Text style={styles.title}>Search for a Github User</Text>
+        <TextInput 
+          style={styles.searchInput}
+          value={this.state.userName}
+          onChange={this.onChange.bind(this)} />
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor="white"
+          onPress={this.onSearch.bind(this)}>
           <Text style={styles.buttonText}>Search</Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
+        <ActivityIndicator
+          animating={this.state.isLoading}
+          color='#111'
+          size='large' />
+        {showError}
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    padding: 30,
+    marginTop: 65,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#48BBEC'
   },
-  input: {
-    width: 300,
+  title: {
+    marginBottom: 20,
+    fontSize: 25,
+    textAlign: 'center',
+    color: '#fff'
+  },
+  searchInput: {
     height: 50,
     padding: 10,
+    marginRight: 5,
+    fontSize: 23,
     borderWidth: 1,
-    borderColor: '#757575',
-    margin: 20,
-    fontSize: 20
+    borderColor: 'white',
+    borderRadius: 8,
+    color: 'white'
   },
   button: {
-    padding: 10,
-    height: 50,
-    width: 300,
-    marginLeft: 40,
-    marginRight: 40,
-    backgroundColor: '#5A9367'
+    height: 45,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
   },
   buttonText: {
-    color: 'white',
-    fontSize: 25,
-    textAlign: 'center'
+    fontSize: 22,
+    color: '#111',
+    alignSelf: 'center'
   },
+  errorText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'red'
+  }
 })
 
 export default Main

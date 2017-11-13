@@ -1,13 +1,9 @@
-const apiUrl = 'https://api.github.com/users' 
-
-export const fetchUser = (user) => {
-  if (user) {
-    return fetch(`${apiUrl}/${user}`)
-      .then(data => data.json())
+const api = {
+  getBio(username) {
+    username = username.toLowerCase().trim()
+    const url =`https://api.github.com/users/${username}`
+    return fetch(url).then(res => res.json())
   }
 }
 
-export const fetchRepo = (user) => {
-  return fetch(`${apiUrl}/${user}/repos`)
-    .then(data => data.json())
-}
+export default api

@@ -1,19 +1,20 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { MainStack } from './components/Navigator'
+import React, { Component } from 'react'
+import { StyleSheet, NavigatorIOS } from 'react-native'
+import Main from './components/Main'
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <MainStack />
-      </View>
+        <NavigatorIOS
+          style={styles.container} 
+          initialRoute={{ title: 'Github Note Taker',component: Main}} />
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#111111'
   }
 })
