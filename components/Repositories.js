@@ -3,11 +3,16 @@ import PropTypes from 'prop-types'
 import { Text, View, ScrollView, StyleSheet, TouchableHighlight } from 'react-native'
 import Badge from './Badge'
 import Seperator from './Helpers/Seperator'
+import Web from './Helpers/Web'
 
 export default class Repositories extends Component {
   
   openPage(url) {
-    console.log('open url', url)
+    this.props.navigator.push({
+      title: 'Web View',
+      component: Web,
+      passProps: { url }
+    })
   }
 
   render() {
