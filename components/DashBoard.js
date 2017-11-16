@@ -7,6 +7,7 @@ import {
   TouchableHighlight
  } from 'react-native'
 
+import api from '../utils/api'
 import Profile from './Profile'
 import Repositories from './Repositories'
 
@@ -36,14 +37,18 @@ class DashBoard extends Component {
       passProps: { userInfo: this.props.userInfo }
     });
   }
-
+  
   goToRepos() {
-    this.props.navigator.push({
-      title: 'Repositories',
-      component: Repositories,
-      passProps: { userInfo: this.props.userInfo }
-    })
+    api.getRepos(this.props.userInfo.login)
+      .then(data => {
+        this.props.navigator.push({
+          title: 'Repositories',
+          component: Repositories,
+          passProps: { userInfo: this.props.userInfo, repos: data }
+        })
+      })
   }
+
   goToNotes() {
     console.log('Go to notes');
   }
